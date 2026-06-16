@@ -8,7 +8,7 @@ package-data = {neuralgcm_torch = ["data/*"]}
 
 [project]
 name = "neuralgcm-torch"
-version = "0.1.1"
+version = "0.1.2"
 description = "Idiomatic-PyTorch rewrite of NeuralGCM: nn.Module models, converted checkpoints 🌍⚡"
 readme = "README.md"
 license = "Apache-2.0"
