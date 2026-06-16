@@ -285,9 +285,13 @@ class ConservativeRegridder(Regridder):
   def _mean(self, field: torch.Tensor) -> torch.Tensor:
     """Computes cell-averages of field on the target grid."""
     # Note: any NaN in input produces all NaN in output.
-    return torch.einsum(
-        'ab,cd,...bd->...ac', self.lon_weights, self.lat_weights, field
-    )
+    # Contract latitude then longitude as two separate steps so the
+    # intermediates stay small. A single 'ab,cd,...bd->...ac' einsum would,
+    # without `opt_einsum` installed to find the optimal path, materialize the
+    # (a,b,c,d) outer product of the two weight matrices first — e.g. regridding
+    # ERA5 0.25deg -> 2.8deg that intermediate is ~34 GB and OOMs the GPU.
+    field = torch.einsum('cd,...bd->...bc', self.lat_weights, field)
+    return torch.einsum('ab,...bc->...ac', self.lon_weights, field)
 
   def forward(self, field: torch.Tensor) -> torch.Tensor:
     not_nulls = torch.logical_not(torch.isnan(field))

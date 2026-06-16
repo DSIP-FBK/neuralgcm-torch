@@ -13,7 +13,7 @@ A fresh virtual environment with [uv](https://docs.astral.sh/uv/):
 
 ```sh
 uv venv
-uv pip install 'neuralgcm-torch[hub]'
+uv pip install 'neuralgcm-torch[hub,notebooks]'
 ```
 
 …or with `pip`:
@@ -21,12 +21,15 @@ uv pip install 'neuralgcm-torch[hub]'
 ```sh
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install 'neuralgcm-torch[hub]'
+pip install 'neuralgcm-torch[hub,notebooks]'
 ```
 
-This pulls in `dinosaur-torch` (the dynamical core) as well; the `[hub]` extra
+This pulls in `dinosaur-torch` (the dynamical core) as well. The `[hub]` extra
 adds Hugging Face support so `pretrained.fetch_checkpoint` can download the
-converted checkpoints (cached on first use).
+converted checkpoints (cached on first use); the `[notebooks]` extra adds what
+the example notebooks need on top of the package — `matplotlib` for plots and
+`gcsfs`/`zarr` to read the public ERA5 archive. For the package alone, plain
+`'neuralgcm-torch[hub]'` is enough.
 
 ```python
 import neuralgcm_torch as neuralgcm

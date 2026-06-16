@@ -7,7 +7,7 @@ packages = ["dinosaur_torch"]
 
 [project]
 name = "dinosaur-torch"
-version = "0.1.0"
+version = "0.1.1"
 description = "Idiomatic-PyTorch rewrite of the Dinosaur spectral dynamical core 🦖⚡"
 readme = "README.md"
 license = "Apache-2.0"
@@ -30,6 +30,7 @@ classifiers = [
 requires-python = ">=3.11"
 dependencies = [
     "torch",
+    "opt-einsum",  # lets torch.einsum pick memory-safe contraction paths
     "numpy",
     "pint",
     "scipy",

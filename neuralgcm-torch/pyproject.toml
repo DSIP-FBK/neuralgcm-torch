@@ -8,7 +8,7 @@ package-data = {neuralgcm_torch = ["data/*"]}
 
 [project]
 name = "neuralgcm-torch"
-version = "0.1.0"
+version = "0.1.1"
 description = "Idiomatic-PyTorch rewrite of NeuralGCM: nn.Module models, converted checkpoints 🌍⚡"
 readme = "README.md"
 license = "Apache-2.0"
@@ -30,7 +30,7 @@ classifiers = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "dinosaur-torch",
+    "dinosaur-torch>=0.1.1",  # 0.1.1: memory-safe conservative regridder
     "torch",
     "numpy",
     "pandas",
@@ -45,6 +45,14 @@ tests = [
 # scripts that download/publish converted checkpoints on the Hugging Face Hub.
 hub = [
     "huggingface_hub",
+]
+# Everything the example notebooks need on top of the package: plotting and
+# reading the public ERA5 archive (gs:// Zarr). Install with
+# `pip install 'neuralgcm-torch[hub,notebooks]'` to run the notebooks.
+notebooks = [
+    "matplotlib",
+    "gcsfs",
+    "zarr",
 ]
 
 [project.urls]
