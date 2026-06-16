@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+.venv/
+uv.lock
+*.pt
+neuralgcm-torch/notebooks/checkpoints/
+.ipynb_checkpoints/

@@ -1,0 +1,31 @@
+[project]
+name = "neuralgcm-torch-workspace"
+version = "0.0.0"
+description = "Development workspace for the neuralgcm-torch and dinosaur-torch packages"
+requires-python = ">=3.11"
+dependencies = [
+    "dinosaur-torch",
+    "neuralgcm-torch[hub]",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["dinosaur-torch", "neuralgcm-torch"]
+
+[tool.uv.sources]
+dinosaur-torch = { workspace = true }
+neuralgcm-torch = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "ruff",
+    "pre-commit",
+    "ipykernel",
+    "matplotlib",
+    "nbclient",
+    "nbformat",
+    "gcsfs",
+]

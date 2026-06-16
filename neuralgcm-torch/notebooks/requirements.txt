@@ -1,0 +1,7 @@
+# Build dependencies for the documentation site (Jupyter Book).
+#
+# The notebooks are rendered from their stored outputs (execute is off in
+# _config.yml), so neither the package nor torch needs to be installed to build
+# the site — only Jupyter Book itself.
+jupyter-book>=1.0,<2
+sphinxcontrib-video       # {video} directive for the mp4 hero on the homepage

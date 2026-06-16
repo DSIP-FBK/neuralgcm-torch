@@ -1,0 +1,17 @@
+neuralgcm-torch / dinosaur-torch
+Copyright 2026 Fondazione Bruno Kessler
+
+This product is an idiomatic-PyTorch rewrite of NeuralGCM and its spectral
+dynamical core, Dinosaur. Portions of this software are derived from those
+projects and retain Google LLC's copyright notices as required by the
+Apache License, Version 2.0:
+
+  NeuralGCM — Copyright Google LLC — Apache License 2.0
+  https://github.com/neuralgcm/neuralgcm
+
+  Dinosaur — Copyright Google LLC — Apache License 2.0
+  https://github.com/neuralgcm/dinosaur
+
+The published NeuralGCM model checkpoints, redistributed in converted form,
+are © Google LLC and licensed under CC BY-SA 4.0 — a separate license from
+this code's Apache-2.0 license. See the Hugging Face model card for terms.

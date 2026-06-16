@@ -1,0 +1,15 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync
+      - name: lint
+        run: uv run ruff check dinosaur-torch neuralgcm-torch
+      - name: dinosaur-torch tests (CPU)
+        run: DINOSAUR_TORCH_TEST_DEVICE=cpu uv run pytest dinosaur-torch -q
+      - name: import smoke
+        run: uv run python -c "import neuralgcm_torch, dinosaur_torch"

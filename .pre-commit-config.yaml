@@ -1,0 +1,23 @@
+# Install once:  uv tool install pre-commit && pre-commit install
+# Run on demand: pre-commit run --all-files
+#
+# Lint-only by design: ruff's *formatter* is configured in ruff.toml but not
+# enforced here, to preserve the existing Google-style formatting. Adopt it
+# any time by adding the `ruff-format` hook below (and running it once).
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.17
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-toml
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=10240"]  # blocks stray checkpoints; allows the hero animation + example dataset

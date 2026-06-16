@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=77"]  # PEP 639 SPDX license expression + license-files
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["dinosaur_torch"]
+
+[project]
+name = "dinosaur-torch"
+version = "0.1.0"
+description = "Idiomatic-PyTorch rewrite of the Dinosaur spectral dynamical core 🦖⚡"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Gabriele Franch", email = "franch@fbk.eu" }]
+keywords = [
+    "climate", "weather", "atmosphere", "pytorch",
+    "spectral-dynamical-core", "differentiable-physics", "spherical-harmonics",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "torch",
+    "numpy",
+    "pint",
+    "scipy",
+    "scikit-learn",
+    "pandas",
+    "xarray",
+]
+
+[project.optional-dependencies]
+tests = [
+    "pytest",
+]
+
+[project.urls]
+Homepage = "https://github.com/DSIP-FBK/neuralgcm-torch"
+Repository = "https://github.com/DSIP-FBK/neuralgcm-torch"
+Issues = "https://github.com/DSIP-FBK/neuralgcm-torch/issues"

@@ -1,0 +1,23 @@
+# Table of contents — https://jupyterbook.org/customize/toc.html
+format: jb-book
+root: intro
+parts:
+  - caption: Getting started
+    chapters:
+      - file: installation
+  - caption: Forecasting
+    chapters:
+      - file: forecast_quickstart
+      - file: forecast_1_4_deg
+      - file: forecast_0_7_deg
+      - file: forecast_ens_1_4_deg
+      - file: forecast_precip_2_8_deg
+      - file: forecast_evap_2_8_deg
+  - caption: Climate
+    chapters:
+      - file: climate_stability
+  - caption: Data & model internals
+    chapters:
+      - file: data_preparation
+      - file: deepdive_into_models
+      - file: checkpoint_modifications

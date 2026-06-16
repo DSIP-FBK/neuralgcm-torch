@@ -1,0 +1,10 @@
+dinosaur-torch
+Copyright 2026 Fondazione Bruno Kessler
+
+This product is an idiomatic-PyTorch rewrite of Dinosaur, the spectral
+dynamical core behind NeuralGCM. Portions of this software are derived from
+Dinosaur and retain Google LLC's copyright notices as required by the
+Apache License, Version 2.0:
+
+  Dinosaur — Copyright Google LLC — Apache License 2.0
+  https://github.com/neuralgcm/dinosaur

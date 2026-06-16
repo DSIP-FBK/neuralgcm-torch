@@ -1,0 +1,27 @@
+# Tuned to the codebase's existing Google-style formatting (2-space indent,
+# single quotes, 80 columns) so the formatter does not rewrite everything.
+target-version = "py311"
+line-length = 80
+indent-width = 2
+extend-exclude = ["dinosaur", "neuralgcm", "jax-gcm", ".venv", "*.ipynb"]
+
+[format]
+quote-style = "single"
+indent-style = "space"
+
+[lint]
+# A quality gate for real issues (undefined names, unused vars/imports,
+# bugbear), tuned to pass on the existing Google-style code. Modernization
+# (UP: e.g. Optional[X] -> X | None) and import sorting (I) are intentionally
+# left off to avoid restyling the established codebase — opt in any time with
+# `ruff check --select UP,I --fix`.
+select = ["F", "E7", "E9", "W", "B"]
+ignore = [
+  "E731",  # assigned lambdas — used intentionally in a few places
+  "E741",  # ambiguous names (l, I) — common in spectral-math code
+  "B905",  # zip() without strict= — lengths are known-equal here
+  "B008",  # function call in an argument default — used deliberately
+]
+
+[lint.per-file-ignores]
+"__init__.py" = ["F401"]  # re-exports define the package's public API

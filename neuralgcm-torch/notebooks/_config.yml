@@ -1,0 +1,41 @@
+# Jupyter Book configuration — https://jupyterbook.org/customize/config.html
+#
+# This folder *is* the book root: the notebooks are rendered in place (no
+# copying). Pages are built from the committed notebook outputs — nothing is
+# re-executed at build time, so the site builds on a plain CPU runner with no
+# GPU, no checkpoints and no network access.
+title: neuralgcm-torch
+author: Gabriele Franch
+copyright: "2026, Fondazione Bruno Kessler"  # keep in sync with the root NOTICE file
+logo: neuralgcm-torch.png
+
+# Only build files listed in _toc.yml; ignore checkpoints/, *.nc, etc.
+only_build_toc_files: true
+
+execute:
+  execute_notebooks: "off"
+
+repository:
+  url: https://github.com/DSIP-FBK/neuralgcm-torch
+  path_to_book: neuralgcm-torch/notebooks
+  branch: main
+
+html:
+  use_issues_button: true
+  use_repository_button: true
+  use_edit_page_button: true
+  home_page_in_navbar: false
+
+parse:
+  myst_enable_extensions:
+    - amsmath
+    - dollarmath
+
+sphinx:
+  extra_extensions:
+    - sphinxcontrib.video
+  config:
+    html_baseurl: "https://dsip-fbk.github.io/neuralgcm-torch/"
+    # the rendered notebooks contain wide figures; let them use the full width
+    html_theme_options:
+      navigation_with_keys: false
