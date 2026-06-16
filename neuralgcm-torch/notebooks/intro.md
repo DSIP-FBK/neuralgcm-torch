@@ -1,6 +1,6 @@
 # neuralgcm-torch
 
-[NeuralGCM](https://github.com/neuralgcm/neuralgcm) is a hybrid ML + physics
+NeuralGCM is a hybrid ML + physics
 global circulation model that pairs a differentiable spectral dynamical core
 with learned physics to forecast weather and run climate-scale simulations,
 originally written in JAX. **`neuralgcm-torch` brings it to PyTorch** — load the

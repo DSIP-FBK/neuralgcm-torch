@@ -15,7 +15,7 @@
   <a href="https://www.nature.com/articles/s41586-024-07744-y"><img src="https://img.shields.io/badge/paper-Nature%202024-b31b1b" alt="Paper"></a>
 </p>
 
-[NeuralGCM](https://github.com/neuralgcm/neuralgcm) is a hybrid ML + physics
+NeuralGCM is a hybrid ML + physics
 global circulation model that pairs a differentiable spectral dynamical core
 with learned physics to forecast weather and run climate-scale simulations,
 originally written in JAX.
