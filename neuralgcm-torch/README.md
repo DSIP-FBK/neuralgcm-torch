@@ -22,20 +22,6 @@ originally written in JAX.
 **This package brings it to PyTorch:** load the **published NeuralGCM checkpoints**
 (converted to `torch`) and forecast in a few lines.
 
-```python
-import neuralgcm_torch as neuralgcm
-from neuralgcm_torch import pretrained
-
-path = pretrained.fetch_checkpoint('deterministic_2_8_deg')   # cached download
-model = neuralgcm.PressureLevelModel.from_checkpoint(path, device='cuda')
-
-state = model.encode(model.inputs_from_xarray(era5_slice),
-                     model.forcings_from_xarray(era5_slice), rng=42)
-state, outputs = model.unroll(state, forcings, steps=4,
-                              timedelta='24 hours', start_with_input=True)
-predictions = model.data_to_xarray(outputs, times=range(0, 96, 24))
-```
-
 <p align="center">
   <video autoplay loop muted playsinline width="360"
          poster="https://raw.githubusercontent.com/DSIP-FBK/neuralgcm-torch/main/neuralgcm-torch/notebooks/media/forecast_0_7_deg_poster.png">
@@ -44,7 +30,7 @@ predictions = model.data_to_xarray(outputs, times=range(0, 96, 24))
          width="360" alt="A 12-day NeuralGCM-0.7° forecast of 850 hPa specific humidity on a rotating globe">
   </video>
   <br>
-  <em>A 12-day NeuralGCM-0.7° forecast — 850&nbsp;hPa specific humidity — on a slowly rotating globe.</em>
+  <em>A 12-day NeuralGCM-0.7° forecast running in pytorch — 850&nbsp;hPa specific humidity</em>
 </p>
 
 > **NOTA BENE:** This port is **not affiliated with, endorsed by,
@@ -88,9 +74,33 @@ offline**, so this package has **no jax (nor gin or haiku) dependency at runtime
 
 ## Quick start
 
-`pretrained.fetch_checkpoint` pulls a converted checkpoint from the Hub and
-caches it; from there it's the xarray-in / xarray-out API shown above. The
-[forecast_quickstart.ipynb](notebooks/forecast_quickstart.ipynb) notebook is the
+A fresh virtual environment with [uv](https://docs.astral.sh/uv/):
+
+```sh
+uv venv
+uv pip install 'neuralgcm-torch[hub,notebooks]'
+```
+
+…or with `pip`:
+
+```sh
+python -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install 'neuralgcm-torch[hub,notebooks]'
+```
+
+You can then instantiate a pretrained model in python in a few lines:
+
+```python
+import neuralgcm_torch as neuralgcm
+from neuralgcm_torch import pretrained
+
+path = pretrained.fetch_checkpoint('deterministic_2_8_deg')  # cached Hub download
+model = neuralgcm.PressureLevelModel.from_checkpoint(path, device='cuda')
+```
+
+The
+[forecast_quickstart.html](https://dsip-fbk.github.io/neuralgcm-torch/forecast_quickstart.html) notebook is the
 complete, executed example — ERA5 from the public ARCO archive, conservative
 regridding via `dinosaur_torch.xarray_utils`, and a forecast-vs-ERA5 comparison
 (a PyTorch port of the upstream `inference_demo`, with day-4 2.8° T850 RMSE
@@ -98,33 +108,28 @@ regridding via `dinosaur_torch.xarray_utils`, and a forecast-vs-ERA5 comparison
 
 ## Notebooks
 
-All upstream documentation notebooks are ported to PyTorch and executed end to
-end in [notebooks/](notebooks/), alongside new ones unique to this port. They
-are also rendered online at
-**[dsip-fbk.github.io/neuralgcm-torch](https://dsip-fbk.github.io/neuralgcm-torch/)**:
+All upstream documentation notebooks are ported to PyTorch alongside new ones unique to this port. They
+are rendered online at **[dsip-fbk.github.io/neuralgcm-torch](https://dsip-fbk.github.io/neuralgcm-torch/)**:
 
 | notebook | what it shows |
 |---|---|
-| [`forecast_quickstart`](notebooks/forecast_quickstart.ipynb) | 2.8° deterministic forecast on real ERA5 (ported `inference_demo`) |
-| [`forecast_1_4_deg`](notebooks/forecast_1_4_deg.ipynb), [`forecast_0_7_deg`](notebooks/forecast_0_7_deg.ipynb) | higher-resolution forecasts (the 0.7° TL255 core, 512×256, 31M params) |
-| [`forecast_ens_1_4_deg`](notebooks/forecast_ens_1_4_deg.ipynb) 🎲 | a NeuralGCM-ENS ensemble with spread and ensemble-mean skill |
-| [`forecast_precip_2_8_deg`](notebooks/forecast_precip_2_8_deg.ipynb), [`forecast_evap_2_8_deg`](notebooks/forecast_evap_2_8_deg.ipynb) | precipitation / evaporation from the learned water-budget closure |
-| [`climate_stability`](notebooks/climate_stability.ipynb) 🌡️ | long stable rollouts — 1.4° stochastic for 6 months, 2.8° precip for 2 years — with seasonal ERA5 forcing, global stability indicators, T850 snapshots and the zonal-mean jet |
-| [`data_preparation`](notebooks/data_preparation.ipynb) | regridding and xarray conversions |
-| [`deepdive_into_models`](notebooks/deepdive_into_models.ipynb) | model internals, autograd, encoded state, randomness (runs offline) |
-| [`checkpoint_modifications`](notebooks/checkpoint_modifications.ipynb) | adding a surface-pressure output / global-mean filter by editing the converted config — plain dict edits, no gin |
+| [`forecast_quickstart`](https://dsip-fbk.github.io/neuralgcm-torch/forecast_quickstart.html) | 2.8° deterministic forecast on real ERA5 (ported `inference_demo`) |
+| [`forecast_1_4_deg`](https://dsip-fbk.github.io/neuralgcm-torch/forecast_1_4_deg.html), [`forecast_0_7_deg`](notebooks/forecast_0_7_deg.html) | higher-resolution forecasts (the 0.7° TL255 core, 512×256, 31M params) |
+| [`forecast_ens_1_4_deg`](https://dsip-fbk.github.io/neuralgcm-torch/forecast_ens_1_4_deg.html) 🎲 | a NeuralGCM-ENS ensemble with spread and ensemble-mean skill |
+| [`forecast_precip_2_8_deg`](https://dsip-fbk.github.io/neuralgcm-torch/forecast_precip_2_8_deg.html), [`forecast_evap_2_8_deg`](notebooks/forecast_evap_2_8_deg.html) | precipitation / evaporation from the learned water-budget closure |
+| [`climate_stability`](https://dsip-fbk.github.io/neuralgcm-torch/climate_stability.html) 🌡️ | long stable rollouts — 1.4° stochastic for 6 months, 2.8° precip for 2 years — with seasonal ERA5 forcing, global stability indicators, T850 snapshots and the zonal-mean jet |
+| [`data_preparation`](https://dsip-fbk.github.io/neuralgcm-torch/data_preparation.html) | regridding and xarray conversions |
+| [`deepdive_into_models`](https://dsip-fbk.github.io/neuralgcm-torch/deepdive_into_models.html) | model internals, autograd, encoded state, randomness (runs offline) |
+| [`checkpoint_modifications`](https://dsip-fbk.github.io/neuralgcm-torch/checkpoint_modifications.html) | adding a surface-pressure output / global-mean filter by editing the converted config — plain dict edits, no gin |
 
 ## Checkpoints on the Hub
 
-The converted weights are hosted on the Hugging Face Hub, so loading needs
+The converted pytorch weights are hosted on the Hugging Face Hub, so loading needs
 **no legacy package, no GCS access and no conversion** — just
 `pip install 'neuralgcm-torch[hub]'` and `pretrained.fetch_checkpoint(name)`
-(cached). `pretrained.CHECKPOINTS` lists the published set (six v1 models + the
-TL63 toy). To pre-populate the notebooks' `checkpoints/` directory in one shot:
+(cached). You can also download them manually from HF:
 
-```sh
-uv run --no-sync python neuralgcm-torch/tools/fetch_checkpoints.py
-```
+https://huggingface.co/it4lia/neuralgcm-torch
 
 The weights are derivative works of Google's NeuralGCM checkpoints
 ([CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)); the Hub

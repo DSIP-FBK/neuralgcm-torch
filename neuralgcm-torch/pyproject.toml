@@ -56,7 +56,7 @@ notebooks = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/DSIP-FBK/neuralgcm-torch"
+Homepage = "https://dsip-fbk.github.io/neuralgcm-torch/"
 Repository = "https://github.com/DSIP-FBK/neuralgcm-torch"
 Issues = "https://github.com/DSIP-FBK/neuralgcm-torch/issues"
 
